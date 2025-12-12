@@ -1,0 +1,37 @@
+services:
+  db:
+    image: ziadmoh7/mysql-custom
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes: 
+      - mysql_vol:/var/lib/mysql  # map named volume to internal data folder
+    networks: 
+      - custom_network  # connect to a custom network
+
+  backend:
+    image: ziadmoh7/backend-app
+    ports: 
+      - "3000:3000"
+    environment:
+      DB_HOST: db # refer to the db service
+      DB_USER: root
+      DB_PASSWORD: root
+    networks: 
+      - custom_network # connect to the same custom network
+    volumes: 
+      - ./downloads:/app/data  # map local './downloads' to container folder
+
+  frontend:
+    image: ziadmoh7/frontend-app
+    ports: 
+      - "5173:5173"
+    networks: 
+      - custom_network # connect to the same custom network
+    stdin_open: true # ensure interactivity 
+
+volumes:
+  mysql_vol:  # define the volume
+
+networks:
+  custom_network: # define the network
