@@ -1,2 +1,40 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/VK9aVgIY)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21960151&assignment_repo_type=AssignmentRepo)
+# OS Lab 6: Multi-Container Application Deployment with Docker
+
+**Docker Hub Username:** ziadmoh7
+
+## Part 1: Docker Hub Images
+
+Below are the links to the container images pushed to Docker Hub:
+
+- **Database:** [ziadmoh7/mysql-custom](https://hub.docker.com/r/ziadmoh7/mysql-custom)
+- **Backend:** [ziadmoh7/backend-app](https://hub.docker.com/r/ziadmoh7/backend-app)
+- **Frontend:** [ziadmoh7/frontend-app](https://hub.docker.com/r/ziadmoh7/frontend-app)
+
+## Part 2: Bonus (Docker Compose)
+
+The `docker-compose.yml` file has been included in the root directory. It orchestrates the following services:
+- **db:** MySQL 8.0 with a persistent volume (`mysql_vol`).
+- **backend:** Node.js API connecting to the `db` service.
+- **frontend:** React/Vite development server binding to the host.
+
+### How to Run
+
+1. Ensure the `./downloads` directory exists locally:
+    ```bash
+    mkdir downloads
+    ```
+2. Start the application stack:
+    ```bash
+    docker compose up -d
+    ``` 
+3. Access the application:
+    - **Frontend:** http://localhost:5173
+
+    - **Backend API:** http://localhost:3000
+
+    - **CSV Export:** Files will appear in the `./downloads` folder.
+4. Stop the application stack:
+    ```bash
+    docker compose down
+    ```
+    To also remove the persistent data volume, add `-v`
